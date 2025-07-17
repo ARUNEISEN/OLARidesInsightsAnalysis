@@ -66,17 +66,18 @@
 ## Step By Step Procudure
 
 ## Download The Raw data
-    Downloaded and placed Raw data into the project folder
+   Downloaded and placed Raw data into the project folder
 ## Data Preprocessing and Manipulation
    OLA ride data are retrived and converted to DataFrames using python , Pandas
     sample code nippet:
+
                         datafeed = pd.ExcelFile(filePath)
                         july_df = datafeed.parse("July")
+
     Filling Null values:
+
                         july_df['Customer_Rating'].fillna(july_df['Customer_Rating'].mean(), inplace=True)
-
                         july_df['Driver_Ratings'].fillna(july_df['Driver_Ratings'].median(), inplace=True)
-
                         july_df['Payment_Method'].fillna('Unknown', inplace=True)
 
 ## DataFrames data moved to PostgreSQL tables
@@ -89,29 +90,29 @@
 ## Data are retrieved based on SQL Questions asked
     SQL Queries created for given scenarios and results are stored in the DataFrames
         code snippet:
-                def __init__(self):
-                    self.connection = psg.connect(
-                        host="localhost",
-                        database="OlaRide_Insights",
-                        user="postgres",
-                        password="root"
-                    )
-                    self.cursor = self.connection.cursor()
+                        def __init__(self):
+                            self.connection = psg.connect(
+                                host="localhost",
+                                database="OlaRide_Insights",
+                                user="postgres",
+                                password="root"
+                            )
+                            self.cursor = self.connection.cursor()
 
-                # 1. Retrieve all successful bookings:
+                        # 1. Retrieve all successful bookings:
 
-                def getAllSuccessfulBookings(self):
-                    query = '''SELECT "Date","Booking_ID" ,"Booking_Status", "Customer_ID",  "Vehicle_Type",  "Pickup_Location", 
-                                    "Drop_Location","Booking_Value", "Payment_Method","Ride_Distance", "Driver_Ratings", "Customer_Rating"
-                            FROM "OLA_Ride_Data"
-                            WHERE "Booking_Status" = 'Success'
-                            '''
-                    self.cursor.execute(query)
-                    rows = self.cursor.fetchall()
-                    df = pd.DataFrame(rows,columns=["Date","Booking_ID" ,"Booking_Status", "Customer_ID",  "Vehicle_Type",  "Pickup_Location", 
-                                                    "Drop_Location","Booking_Value", "Payment_Method","Ride_Distance", "Driver_Ratings", "Customer_Rating"])
-                    return df
-     
+                        def getAllSuccessfulBookings(self):
+                            query = '''SELECT "Date","Booking_ID" ,"Booking_Status", "Customer_ID",  "Vehicle_Type",  "Pickup_Location", 
+                                            "Drop_Location","Booking_Value", "Payment_Method","Ride_Distance", "Driver_Ratings", "Customer_Rating"
+                                    FROM "OLA_Ride_Data"
+                                    WHERE "Booking_Status" = 'Success'
+                                    '''
+                            self.cursor.execute(query)
+                            rows = self.cursor.fetchall()
+                            df = pd.DataFrame(rows,columns=["Date","Booking_ID" ,"Booking_Status", "Customer_ID",  "Vehicle_Type",  "Pickup_Location", 
+                                                            "Drop_Location","Booking_Value", "Payment_Method","Ride_Distance", "Driver_Ratings", "Customer_Rating"])
+                            return df
+            
 ## streamlit application created
     streamlit application created to display the results as Dashboard with Barcharts, Tables, Piecarts.
 
