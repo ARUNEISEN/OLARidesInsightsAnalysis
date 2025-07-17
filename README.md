@@ -65,13 +65,20 @@
  
 ## Step By Step Procudure
 
-## Clone the public Repo data
+## Download The Raw data
     Downloaded and placed Raw data into the project folder
-## Data Manipulation
+## Data Preprocessing and Manipulation
    OLA ride data are retrived and converted to DataFrames using python , Pandas
     sample code nippet:
                        datafeed = pd.ExcelFile(filePath)
                         july_df = datafeed.parse("July")
+    Filling Null values:
+                    uly_df['Customer_Rating'].fillna(july_df['Customer_Rating'].mean(), inplace=True)
+
+                    july_df['Driver_Ratings'].fillna(july_df['Driver_Ratings'].median(), inplace=True)
+
+                    july_df['Payment_Method'].fillna('Unknown', inplace=True)
+
 ## DataFrames data moved to PostgreSQL tables
     These DataFrames converted to SQL tables under OlaRide_Insights Database
 
@@ -80,7 +87,7 @@
                 df = self.ola_df
                 df = self.setDataType(self.ola_df)
                 table_name = 'OLA_Ride_Data'   
-## Data are retrieved based on Business case study
+## Data are retrieved based on SQL Questions asked
     SQL Queries created for given scenarios and results are stored in the DataFrames
     code snippet:
                 def __init__(self):
