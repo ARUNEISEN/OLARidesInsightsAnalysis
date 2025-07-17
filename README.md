@@ -70,26 +70,25 @@
 ## Data Preprocessing and Manipulation
    OLA ride data are retrived and converted to DataFrames using python , Pandas
     sample code nippet:
-                       datafeed = pd.ExcelFile(filePath)
+                        datafeed = pd.ExcelFile(filePath)
                         july_df = datafeed.parse("July")
     Filling Null values:
-                    uly_df['Customer_Rating'].fillna(july_df['Customer_Rating'].mean(), inplace=True)
+                        july_df['Customer_Rating'].fillna(july_df['Customer_Rating'].mean(), inplace=True)
 
-                    july_df['Driver_Ratings'].fillna(july_df['Driver_Ratings'].median(), inplace=True)
+                        july_df['Driver_Ratings'].fillna(july_df['Driver_Ratings'].median(), inplace=True)
 
-                    july_df['Payment_Method'].fillna('Unknown', inplace=True)
+                        july_df['Payment_Method'].fillna('Unknown', inplace=True)
 
 ## DataFrames data moved to PostgreSQL tables
-    These DataFrames converted to SQL tables under OlaRide_Insights Database
-
+   These DataFrames converted to SQL tables under OlaRide_Insights Database
     code snippet:
-                engine = create_engine( f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}")
-                df = self.ola_df
-                df = self.setDataType(self.ola_df)
-                table_name = 'OLA_Ride_Data'   
+                        engine = create_engine( f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}")
+                        df = self.ola_df
+                        df = self.setDataType(self.ola_df)
+                        table_name = 'OLA_Ride_Data'   
 ## Data are retrieved based on SQL Questions asked
     SQL Queries created for given scenarios and results are stored in the DataFrames
-    code snippet:
+        code snippet:
                 def __init__(self):
                     self.connection = psg.connect(
                         host="localhost",
