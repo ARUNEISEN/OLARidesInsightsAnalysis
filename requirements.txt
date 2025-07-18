@@ -1,8 +1,7 @@
-plotly
-streamlit
-pandas
-plotly
-numpy
-matplotlib
-psycopg2
-sqlalchemy
+streamlit==1.34.0
+pandas==2.2.2
+plotly==5.21.0
+numpy==1.26.4
+matplotlib==3.8.4
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.30
